@@ -10,41 +10,6 @@ const player = {
 
 const pressed = new Set();
 
-function setupCanvas() {
-  cleanScreen();
-
-  document.addEventListener("keydown", e => {
-    const speed = player.speed;
-    const key = e.key;
-    if (['w', 'a', 's', 'd'].includes(key)) {
-      pressed.add(e.key);
-    }
-
-    if (pressed.has('w')) {
-      player.y -= speed;
-    }
-
-    if (pressed.has('a')) {
-      player.x -= speed;
-    }
-
-    if (pressed.has('s')) {
-      player.y += speed;
-    }
-
-    if (pressed.has('d')) {
-      player.x += speed;
-    }
-
-    console.log(pressed);
-  });
-
-  document.addEventListener("keyup", e => {
-    const key = e.key;
-    pressed.delete(key);
-  });
-}
-
 function cleanScreen() {
   const thickness = 50;
   const width = canvas.width;
@@ -60,6 +25,42 @@ function cleanScreen() {
   ctx.fillRect(width - thickness, 0, thickness, height);
 }
 
+function setup() {
+  cleanScreen();
+
+  document.addEventListener("keydown", e => {
+    const key = e.key;
+    if (['w', 'a', 's', 'd'].includes(key)) {
+      pressed.add(key);
+    }
+  });
+
+  document.addEventListener("keyup", e => {
+    const key = e.key;
+    pressed.delete(key);
+  });
+}
+
+
+function updatePlayer() {
+  const speed = player.speed;
+  if (pressed.has('w')) {
+    player.y -= speed;
+  }
+
+  if (pressed.has('a')) {
+    player.x -= speed;
+  }
+
+  if (pressed.has('s')) {
+    player.y += speed;
+  }
+
+  if (pressed.has('d')) {
+    player.x += speed;
+  }
+}
+
 function drawPlayer() {
   const thickness = 25;
   ctx.fillStyle = 'red';
@@ -68,9 +69,10 @@ function drawPlayer() {
 
 function main() {
   cleanScreen();
+  updatePlayer();
   drawPlayer();
   requestAnimationFrame(main);
 }
 
-setupCanvas();
+setup();
 requestAnimationFrame(main);
