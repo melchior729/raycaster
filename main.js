@@ -45,7 +45,6 @@ function setup() {
 
 function updatePlayer() {
   const speed = player.speed;
-  console.log(`X: ${player.x}, Y: ${player.y}`);
 
   if (pressed.has('w')) {
     player.y -= speed;
