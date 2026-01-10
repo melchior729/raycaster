@@ -45,6 +45,9 @@ function setup() {
 
 function updatePlayer() {
   const speed = player.speed;
+  const width = canvas.width;
+  const height = canvas.height;
+  const size = player.size;
 
   if (pressed.has('w')) {
     player.y -= speed;
@@ -62,15 +65,17 @@ function updatePlayer() {
 
   if (pressed.has('s')) {
     player.y += speed;
-    if (player.y > canvas.height - margin - player.size) {
-      player.y = canvas.height - margin - player.size;
+    const max = height - margin - size;
+    if (player.y > max) {
+      player.y = max;
     }
   }
 
   if (pressed.has('d')) {
     player.x += speed;
-    if (player.x > canvas.width - margin - player.size) {
-      player.x = canvas.width - margin - player.size;
+    const max = width - margin - size;
+    if (player.x > max) {
+      player.x = max;
     }
   }
 }
