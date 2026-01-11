@@ -18,7 +18,7 @@ export default class World {
     return grid;
   }
 
-  getIndices(tileSize) {
-    return [x / tileSize, y / tileSize];
+  getIndices(x, y) {
+    return [Math.floor(x / this.tileSize), Math.floor(y / this.tileSize)];
   }
 }
