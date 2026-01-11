@@ -1,4 +1,5 @@
-import World from './world.js';
+import World from './World.js';
+import Artist from './Artist.js';
 
 const canvas = document.getElementById('canvas');
 
@@ -10,44 +11,6 @@ const player = {
   angle: 0
 };
 
-class Artist {
-
-  constructor(canvas) {
-    this.canvas = canvas;
-    this.ctx = canvas.getContext('2d');
-  }
-
-  cleanScreen(world) {
-    const width = canvas.width;
-    const height = canvas.height;
-    const backgroundColor = 'white';
-    const wallColor = 'blue';
-    const sideLength = world.getSideLength();
-    const tileSize = width / sideLength;
-
-    this.ctx.fillStyle = backgroundColor;
-    this.ctx.fillRect(0, 0, width, height);
-
-    this.ctx.fillStyle = wallColor;
-    for (let i = 0; i < sideLength; i++) {
-      for (let j = 0; j < sideLength; j++) {
-        if (world.grid[i][j]) {
-          this.ctx.fillRect(i * tileSize, j * tileSize, tileSize, tileSize);
-        }
-      }
-    }
-    // dependent on the grid!
-    // ctx.fillRect(0, 0, width, margin);
-    // ctx.fillRect(0, 0, margin, height);
-    // ctx.fillRect(0, height - margin, width, margin);
-    // ctx.fillRect(width - margin, 0, margin, height);
-  }
-
-  drawPlayer(player) {
-    this.ctx.fillStyle = 'red';
-    this.ctx.fillRect(player.x, player.y, player.size, player.size);
-  }
-}
 
 const pressed = new Set();
 
@@ -86,15 +49,15 @@ function updatePlayer() {
   }
 }
 
+const artist = new Artist(canvas);
+const world = new World(10);
+setup();
+requestAnimationFrame(main);
 
 function main() {
-  artist.cleanScreen(world);
+  artist.drawScreen(world);
   updatePlayer();
   artist.drawPlayer(player);
   requestAnimationFrame(main);
 }
 
-const artist = new Artist(canvas);
-const world = new World(10);
-setup();
-requestAnimationFrame(main);
