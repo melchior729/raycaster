@@ -7,8 +7,9 @@ export default class InputController {
 
   _setup() {
     document.addEventListener("keydown", e => {
+      const validKeys = ['w', 'a', 's', 'd']
       const key = e.key;
-      if (['w', 'a', 's', 'd'].includes(key)) {
+      if (validKeys.includes(key)) {
         this.pressed.add(key);
       }
     });
@@ -19,24 +20,21 @@ export default class InputController {
     });
   }
 
-
-  updatePlayer(player) {
-    const speed = player.speed;
-
+  movePlayer(player) {
     if (this.pressed.has('w')) {
-      player.y -= speed;
+      player.moveUp();
     }
 
     if (this.pressed.has('a')) {
-      player.x -= speed;
+      player.moveLeft();
     }
 
     if (this.pressed.has('s')) {
-      player.y += speed;
+      player.moveDown();
     }
 
     if (this.pressed.has('d')) {
-      player.x += speed;
+      player.moveRight();
     }
   }
 }

@@ -6,11 +6,11 @@ import World from './World.js';
 const canvas = document.getElementById('canvas');
 const artist = new Artist(canvas);
 const controller = new InputController();
-const world = new World(10);
+const world = new World(16);
 const player = new Player();
 
 function main() {
-  controller.updatePlayer(player);
+  controller.movePlayer(player);
   artist.drawScreen(world);
   artist.drawPlayer(player);
   requestAnimationFrame(main);

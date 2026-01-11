@@ -6,10 +6,10 @@ export default class Artist {
   }
 
   drawScreen(world) {
-    const width = canvas.width;
-    const height = canvas.height;
-    const backgroundColor = 'white';
-    const wallColor = 'blue';
+    const width = this.canvas.width;
+    const height = this.canvas.height;
+    const backgroundColor = 'black';
+    const wallColor = 'purple';
     const sideLength = world.sideLength;
     const tileSize = width / sideLength;
 
@@ -27,7 +27,7 @@ export default class Artist {
   }
 
   drawPlayer(player) {
-    this.ctx.fillStyle = 'red';
+    this.ctx.fillStyle = 'gold';
     this.ctx.fillRect(player.x, player.y, player.size, player.size);
   }
 }
