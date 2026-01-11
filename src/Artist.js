@@ -8,14 +8,19 @@ export default class Artist {
   drawScreen(world) {
     const width = this.canvas.width;
     const height = this.canvas.height;
-    const backgroundColor = 'black';
-    const wallColor = 'purple';
     const sideLength = world.sideLength;
-    const tileSize = width / sideLength;
+    const tileSize = world.tileSize;
+    const worldSize = sideLength * tileSize;
+    const scale = width / worldSize;
 
+    this.ctx.save();
+    this.ctx.scale(scale, scale);
+
+    const backgroundColor = 'black';
     this.ctx.fillStyle = backgroundColor;
     this.ctx.fillRect(0, 0, width, height);
 
+    const wallColor = 'purple';
     this.ctx.fillStyle = wallColor;
     for (let i = 0; i < sideLength; i++) {
       for (let j = 0; j < sideLength; j++) {
@@ -24,6 +29,8 @@ export default class Artist {
         }
       }
     }
+
+    this.ctx.restore();
   }
 
   drawPlayer(player) {

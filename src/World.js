@@ -3,6 +3,7 @@ export default class World {
   constructor(sideLength) {
     this.sideLength = sideLength;
     this.grid = this._generateGrid();
+    this.tileSize = 64;
   }
 
   _generateGrid() {
@@ -15,5 +16,9 @@ export default class World {
       }
     }
     return grid;
+  }
+
+  getIndices(tileSize) {
+    return [x / tileSize, y / tileSize];
   }
 }

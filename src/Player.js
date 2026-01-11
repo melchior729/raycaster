@@ -5,8 +5,6 @@ export default class Player {
     this.y = 500;
     this.speed = 10;
     this.size = 25;
-    this.angle = 0;
-    this.rotationSpeed = 1;
   }
 
   moveUp() {
@@ -23,13 +21,5 @@ export default class Player {
 
   moveRight() {
     this.x += this.speed;
-  }
-
-  rotateLeft() {
-    this.angle += rotationSpeed;
-  }
-
-  rotateRight() {
-    this.angle -= rotationSpeed;
   }
 }
