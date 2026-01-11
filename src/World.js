@@ -16,8 +16,4 @@ export default class World {
     }
     return grid;
   }
-
-  getSideLength() {
-    return this.sideLength;
-  }
 }

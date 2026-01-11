@@ -10,7 +10,7 @@ export default class Artist {
     const height = canvas.height;
     const backgroundColor = 'white';
     const wallColor = 'blue';
-    const sideLength = world.getSideLength();
+    const sideLength = world.sideLength;
     const tileSize = width / sideLength;
 
     this.ctx.fillStyle = backgroundColor;
