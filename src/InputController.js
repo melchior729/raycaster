@@ -22,19 +22,19 @@ export default class InputController {
 
   movePlayer(player) {
     if (this.pressed.has('w')) {
-      player.moveUp();
+      player.moveForward();
     }
 
     if (this.pressed.has('a')) {
-      player.moveLeft();
+      player.rotateLeft();
     }
 
     if (this.pressed.has('s')) {
-      player.moveDown();
+      player.moveBackward();
     }
 
     if (this.pressed.has('d')) {
-      player.moveRight();
+      player.rotateRight();
     }
   }
 }
