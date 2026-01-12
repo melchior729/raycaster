@@ -50,8 +50,8 @@ export default class Player {
     const angle = this.rotationDelta * deltaTime * frameRate * direction;
     const { x, y } = this.directionVector;
 
-    this.directionVector.x = x * Math.cos(angle) - y * Math.sin(angle);
-    this.directionVector.y = x * Math.sin(angle) + y * Math.cos(angle);
+    this.directionVector.x = x - y * angle;
+    this.directionVector.y = y + x * angle;
 
     this._normalize();
   }

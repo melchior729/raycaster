@@ -56,9 +56,12 @@ export default class Artist {
   drawPlayer(player) {
     this.ctx.save();
     this.ctx.scale(this.scale, this.scale);
-    this.ctx.translate(player.x + player.size / 2, player.y + player.size / 2);
-    this.ctx.rotate(-Math.atan2(player.directionVector.x / player.directionVector.y));
 
+    const { x, y } = player.directionVector;
+    const px = player.x + player.size / 2;
+    const py = player.y + player.size / 2;
+
+    this.ctx.setTransform(x * this.scale, y * this.scale, -y * this.scale, x * this.scale, px * this.scale, py * this.scale);
     this.ctx.fillStyle = 'gold';
     this.ctx.fillRect(-player.size / 2, -player.size / 2, player.size, player.size);
 
