@@ -5,7 +5,7 @@ export default class Player {
     this.y = 64;
     this.speed = 10;
     this.size = 25;
-    this.rotationDelta = 0.1;
+    this.rotationDelta = 0.08;
     this.directionVector = { x: 1, y: 0 }
   }
 
@@ -29,10 +29,6 @@ export default class Player {
     this.directionVector.x = this.directionVector.x * Math.cos(this.rotationDelta) - this.directionVector.y * Math.sin(this.rotationDelta);
     this.directionVector.y = this.directionVector.x * Math.sin(this.rotationDelta) + this.directionVector.y * Math.cos(this.rotationDelta);
     this._normalize();
-  }
-
-  getDirectionVectorLength() {
-    return Math.sqrt(this.directionVector.x ** 2 + this.directionVector.y ** 2);
   }
 
   _normalize() {

@@ -34,8 +34,14 @@ export default class Artist {
   }
 
   drawPlayer(player) {
+    this.ctx.save();
+    this.ctx.translate(player.x + player.size / 2, player.y + player.size / 2);
+    this.ctx.rotate(Math.atan(player.directionVector.x / player.directionVector.y));
+
     this.ctx.fillStyle = 'gold';
-    this.ctx.fillRect(player.x, player.y, player.size, player.size);
+    this.ctx.fillRect(-player.size / 2, -player.size / 2, player.size, player.size);
+
+    this.ctx.restore();
   }
 }
 
