@@ -8,52 +8,68 @@ export default class Player {
   constructor() {
     this.x = 64;
     this.y = 64;
-    this.speed = 10;
+    this.speed = 250;
     this.size = 25;
     this.rotationDelta = 0.08;
     this.directionVector = { x: 1, y: 0 }
   }
 
   /**
-  * Moves the player forward depending on their direction vector and by their speed.
+  * Moves the player depending on the direction provided.
+  * @param {number} deltaTime - The time since the last tick.
+  * @param {number} direction - 1 for forward, -1 for backward.
   */
-  moveForward() {
-    this.x += this.directionVector.x * this.speed;
-    this.y += this.directionVector.y * this.speed;
+  _move(deltaTime, direction) {
+    this.x += this.directionVector.x * this.speed * deltaTime * direction;
+    this.y += this.directionVector.y * this.speed * deltaTime * direction;
   }
 
   /**
-  * Moves the player backward depending on their direction vector and by their speed.
+  * Moves the player forward.
+  * @param {number} deltaTime - The time since the last tick.
   */
-  moveBackward() {
-    this.x -= this.directionVector.x * this.speed;
-    this.y -= this.directionVector.y * this.speed;
+  moveForward(deltaTime) {
+    this._move(deltaTime, 1);
   }
 
   /**
-  * Rotates the player left by the rotationDelta.
+  * Moves the player backward.
+  * @param {number} deltaTime - The time since the last tick.
   */
-  rotateLeft() {
-    const oldX = this.directionVector.x;
-    const oldY = this.directionVector.y;
+  moveBackward(deltaTime) {
+    this._move(deltaTime, -1);
+  }
 
-    this.directionVector.x = oldX * Math.cos(this.rotationDelta) + oldY * Math.sin(this.rotationDelta);
-    this.directionVector.y = oldY * Math.cos(this.rotationDelta) - oldX * Math.sin(this.rotationDelta);
+  /**
+  * Rotates the player depending on the direction provided.
+  * @param {number} deltaTime - The time since the last tick.
+  * @param {number} direction - 1 for right, -1 for left.
+  */
+  _rotate(deltaTime, direction) {
+    const frameRate = 60;
+    const angle = this.rotationDelta * deltaTime * frameRate * direction;
+    const { x, y } = this.directionVector;
+
+    this.directionVector.x = x * Math.cos(angle) - y * Math.sin(angle);
+    this.directionVector.y = x * Math.sin(angle) + y * Math.cos(angle);
 
     this._normalize();
   }
 
   /**
-  * Rotates the player right by the rotationDelta.
+  * Rotates the player left.
+  * @param {number} deltaTime - The time since the last tick.
   */
-  rotateRight() {
-    const oldX = this.directionVector.x;
-    const oldY = this.directionVector.y;
+  rotateLeft(deltaTime) {
+    this._rotate(deltaTime, -1);
+  }
 
-    this.directionVector.x = oldX * Math.cos(this.rotationDelta) - oldY * Math.sin(this.rotationDelta);
-    this.directionVector.y = oldX * Math.sin(this.rotationDelta) + oldY * Math.cos(this.rotationDelta);
-
-    this._normalize();
+  /**
+  * Rotates the player right.
+  * @param {number} deltaTime - The time since the last tick.
+  */
+  rotateRight(deltaTime) {
+    this._rotate(deltaTime, 1);
   }
 
   /**

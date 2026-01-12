@@ -31,22 +31,23 @@ export default class InputController {
   /**
   * Moves the player according to the key that was pressed.
   * @param {Player} player - The player to move
+  * @param {number} deltaTime - The time since the last tick.
   */
-  movePlayer(player) {
+  movePlayer(player, deltaTime) {
     if (this.pressed.has('w')) {
-      player.moveForward();
+      player.moveForward(deltaTime);
     }
 
     if (this.pressed.has('a')) {
-      player.rotateLeft();
+      player.rotateLeft(deltaTime);
     }
 
     if (this.pressed.has('s')) {
-      player.moveBackward();
+      player.moveBackward(deltaTime);
     }
 
     if (this.pressed.has('d')) {
-      player.rotateRight();
+      player.rotateRight(deltaTime);
     }
   }
 }
