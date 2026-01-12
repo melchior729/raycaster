@@ -1,3 +1,8 @@
+/**
+ * @file Contains information about the player, such as the location, speed and direction vector. Also has movement methods.
+ * @author Abhay Manoj
+ */
+
 export default class Player {
 
   constructor() {
@@ -9,28 +14,51 @@ export default class Player {
     this.directionVector = { x: 1, y: 0 }
   }
 
+  /**
+  * Moves the player forward depending on their direction vector and by their speed.
+  */
   moveForward() {
     this.x += this.directionVector.x * this.speed;
     this.y += this.directionVector.y * this.speed;
   }
 
+  /**
+  * Moves the player backward depending on their direction vector and by their speed.
+  */
   moveBackward() {
     this.x -= this.directionVector.x * this.speed;
     this.y -= this.directionVector.y * this.speed;
   }
 
+  /**
+  * Rotates the player left by the rotationDelta.
+  */
   rotateLeft() {
-    this.directionVector.x = this.directionVector.x * Math.cos(this.rotationDelta) + this.directionVector.y * Math.sin(this.rotationDelta);
-    this.directionVector.y = this.directionVector.y * Math.cos(this.rotationDelta) - this.directionVector.x * Math.sin(this.rotationDelta);
+    const oldX = this.directionVector.x;
+    const oldY = this.directionVector.y;
+
+    this.directionVector.x = oldX * Math.cos(this.rotationDelta) + oldY * Math.sin(this.rotationDelta);
+    this.directionVector.y = oldY * Math.cos(this.rotationDelta) - oldX * Math.sin(this.rotationDelta);
+
     this._normalize();
   }
 
+  /**
+  * Rotates the player right by the rotationDelta.
+  */
   rotateRight() {
-    this.directionVector.x = this.directionVector.x * Math.cos(this.rotationDelta) - this.directionVector.y * Math.sin(this.rotationDelta);
-    this.directionVector.y = this.directionVector.x * Math.sin(this.rotationDelta) + this.directionVector.y * Math.cos(this.rotationDelta);
+    const oldX = this.directionVector.x;
+    const oldY = this.directionVector.y;
+
+    this.directionVector.x = oldX * Math.cos(this.rotationDelta) - oldY * Math.sin(this.rotationDelta);
+    this.directionVector.y = oldX * Math.sin(this.rotationDelta) + oldY * Math.cos(this.rotationDelta);
+
     this._normalize();
   }
 
+  /**
+  * Normalizes the length of the directionVector.
+  */
   _normalize() {
     const length = Math.sqrt(this.directionVector.x ** 2 + this.directionVector.y ** 2);
     this.directionVector.x = this.directionVector.x / length;

@@ -1,3 +1,8 @@
+/**
+ * @file Contains methods to draw components onto the screen.
+ * @author Abhay Manoj
+ */
+
 export default class Artist {
 
   constructor(canvas) {
@@ -5,16 +10,19 @@ export default class Artist {
     this.ctx = canvas.getContext('2d');
   }
 
+  /**
+  * Draws the background and walls onto the screen.
+  * @param {World} world - The world to draw.
+  */
   drawScreen(world) {
     const width = this.canvas.width;
     const height = this.canvas.height;
     const sideLength = world.sideLength;
     const tileSize = world.tileSize;
-    const worldSize = sideLength * tileSize;
-    const scale = width / worldSize;
+    this._updateScale(world);
 
     this.ctx.save();
-    this.ctx.scale(scale, scale);
+    this.ctx.scale(this.scale, this.scale);
 
     const backgroundColor = 'black';
     this.ctx.fillStyle = backgroundColor;
@@ -33,10 +41,23 @@ export default class Artist {
     this.ctx.restore();
   }
 
+  /**
+  * Updates the scaling between the world and the canvas.
+  * @param {World} world - The world to compare against.
+  */
+  _updateScale(world) {
+    this.scale = this.canvas.width / (world.sideLength * world.tileSize);
+  }
+
+  /**
+  * Draws the player onto the canvas.
+  * @param {Player} player - The player to draw.
+  */
   drawPlayer(player) {
     this.ctx.save();
+    this.ctx.scale(this.scale, this.scale);
     this.ctx.translate(player.x + player.size / 2, player.y + player.size / 2);
-    this.ctx.rotate(Math.atan(player.directionVector.x / player.directionVector.y));
+    this.ctx.rotate(-Math.atan2(player.directionVector.x / player.directionVector.y));
 
     this.ctx.fillStyle = 'gold';
     this.ctx.fillRect(-player.size / 2, -player.size / 2, player.size, player.size);

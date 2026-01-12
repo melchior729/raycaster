@@ -22,6 +22,10 @@ export default class Raycaster {
     }
   }
 
+  _getNearestGridLine(x, y) {
+
+  }
+
   clearRayLengths() {
     this.rayLengths = []
   }

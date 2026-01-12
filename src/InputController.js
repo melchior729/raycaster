@@ -1,3 +1,8 @@
+/**
+ * @file Controls keyboard input, and the brings about the result of those inputs.
+ * @author Abhay Manoj
+ */
+
 export default class InputController {
 
   constructor() {
@@ -5,6 +10,9 @@ export default class InputController {
     this._setup();
   }
 
+  /**
+  * Creates the event listeners for keydown and keyup.
+  */
   _setup() {
     document.addEventListener("keydown", e => {
       const validKeys = ['w', 'a', 's', 'd']
@@ -20,6 +28,10 @@ export default class InputController {
     });
   }
 
+  /**
+  * Moves the player according to the key that was pressed.
+  * @param {Player} player - The player to move
+  */
   movePlayer(player) {
     if (this.pressed.has('w')) {
       player.moveForward();
