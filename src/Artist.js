@@ -10,6 +10,21 @@ export default class Artist {
     this.ctx = canvas.getContext('2d');
   }
 
+  drawRays(rayLengths) {
+    const height = canvas.height;
+    this.ctx.strokeStyle = 'blue';
+    this.ctx.beginPath();
+
+    for (let i = 0; i < rayLengths.length; i++) {
+      const length = rayLengths[i];
+      const startY = (height - length) / 2;
+      this.ctx.moveTo(i, startY);
+      this.ctx.lineTo(i, startY + length);
+    }
+
+    this.ctx.stroke();
+  }
+
   /**
   * Draws the background and walls onto the screen.
   * @param {World} world - The world to draw.

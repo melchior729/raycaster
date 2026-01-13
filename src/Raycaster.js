@@ -5,7 +5,7 @@ export default class Raycaster {
     this.rayLengths = [];
   }
 
-  getRays(player) {
+  shootRays(player) {
     // loop from 0 to the widht of the screen
     // make a function that scales it properly (-1 -> 1)
     // get the player direction vector
@@ -17,11 +17,28 @@ export default class Raycaster {
     // store this in rayLengths[i]
 
     for (let i = 0; i < width; i++) {
+      let scalar = Math.abs(i - width / 2);
+      scalar = !scalar ? 1 : 1 / scalar;
 
+      const directionVector = player.directionVector;
+      const normal = { x: -directionVector.y, y: directionVector.x };
+      const scaledNormal = { x: normal.x * scalar, y: normal.y * scalar };
+      const rayVector = { x: scaledNormal.x + directionVector.x, y: scaledNormal.y + directionVector.y };
+
+      const length = _dda(rayVector, grid);
+      this.rayLengths[i] = length;
     }
   }
 
-  dda(direction, grid) {
+  _dda(x, y, direction, world) {
+    const grid = world.grid;
+    const tileSize = world.tileSize;
+
+    let sideDistX = 0;
+    let sideDistY = 0;
+
+    let dx = 0;
+
     // it will return sidedist x or siddedist 13/01/2026
   }
 
