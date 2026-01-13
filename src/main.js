@@ -34,8 +34,7 @@ function getDeltaTime(currentTime) {
 * @param {number} currentTime - This is handled by requestAnimationFrame.
 */
 function main(currentTime) {
-  const deltaTime = getDeltaTime(currentTime);
-  controller.movePlayer(player, fixedDeltaTime);
+  controller.movePlayer(player, getDeltaTime(currentTime));
   artist.drawScreen(world);
   artist.drawPlayer(player);
   requestAnimationFrame(main);
