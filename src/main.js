@@ -46,8 +46,6 @@ function main(currentTime) {
   controller.movePlayer(player, getDeltaTime(currentTime));
   caster.shootRays(player, world);
   artist.drawRays(caster.rayLengths);
-  // artist.drawScreen(world);
-  // artist.drawPlayer(player);
   requestAnimationFrame(main);
 }
 
