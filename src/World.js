@@ -35,7 +35,7 @@ export default class World {
   * @returns {bool} True if it is a wall, false otherwise.
   */
   isWall(x, y) {
-    return grid[x][y];
+    return this.grid[x][y];
   }
 
   /**

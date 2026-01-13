@@ -12,6 +12,9 @@ export default class Artist {
 
   drawRays(rayLengths) {
     const height = canvas.height;
+    const backgroundColor = 'black';
+    this.ctx.fillStyle = backgroundColor;
+    this.ctx.fillRect(0, 0, this.width, height);
     this.ctx.strokeStyle = 'blue';
     this.ctx.beginPath();
 

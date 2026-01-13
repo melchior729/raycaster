@@ -6,6 +6,7 @@
 import Artist from './Artist.js';
 import InputController from './InputController.js';
 import Player from './Player.js';
+import Raycaster from './Raycaster.js';
 import World from './World.js';
 
 const canvas = document.getElementById('canvas');
@@ -14,6 +15,7 @@ const controller = new InputController();
 const sideLength = 16;
 const world = new World(sideLength);
 const player = new Player();
+const caster = new Raycaster(canvas.width);
 let lastTime = 0;
 
 /**
@@ -42,7 +44,8 @@ const rayLengths = Array.from({ length: 1024 }, (_, i) => {
 */
 function main(currentTime) {
   controller.movePlayer(player, getDeltaTime(currentTime));
-  artist.drawRays(rayLengths);
+  caster.shootRays(player, world);
+  artist.drawRays(caster.rayLengths);
   // artist.drawScreen(world);
   // artist.drawPlayer(player);
   requestAnimationFrame(main);
