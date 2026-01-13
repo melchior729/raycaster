@@ -30,16 +30,13 @@ export default class Raycaster {
     }
   }
 
-  _dda(x, y, direction, world) {
-    const grid = world.grid;
-    const tileSize = world.tileSize;
+  _dda(player, ray, world) {
+    let x = player.x;
+    let y = player.y;
 
-    let sideDistX = 0;
-    let sideDistY = 0;
+    let sideDirX = 0;
+    let sideDirY = 0;
 
-    let dx = 0;
-
-    // it will return sidedist x or siddedist 13/01/2026
   }
 
   clearRays() {

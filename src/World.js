@@ -29,6 +29,16 @@ export default class World {
   }
 
   /**
+  * Returns if the space at grid[x][y] is a wall. 0-indexed and not indices, not px values.
+  * @param {number} x - X grid coordinate of the space to check
+  * @param {number} y - Y grid coordinate of the space to check
+  * @returns {bool} True if it is a wall, false otherwise.
+  */
+  isWall(x, y) {
+    return grid[x][y];
+  }
+
+  /**
   * Returns the indices that the provided x, y, coordinate would be in the grid.
   * @param {number} x - The x coordinate.
   * @param {number} y - The y coordinate.
