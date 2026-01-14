@@ -12,6 +12,7 @@ export default class Player {
     this.size = 25;
     this.rotationDelta = 0.08;
     this.directionVector = { x: 1, y: 0 }
+    this.canMoveForward = true;
   }
 
   /**
@@ -20,8 +21,10 @@ export default class Player {
   * @param {number} direction - 1 for forward, -1 for backward.
   */
   _move(deltaTime, direction) {
-    this.x += this.directionVector.x * this.speed * deltaTime * direction;
-    this.y += this.directionVector.y * this.speed * deltaTime * direction;
+    if (this.canMoveForward) {
+      this.x += this.directionVector.x * this.speed * deltaTime * direction;
+      this.y += this.directionVector.y * this.speed * deltaTime * direction;
+    }
   }
 
   /**

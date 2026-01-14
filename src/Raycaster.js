@@ -28,6 +28,11 @@ export default class Raycaster {
         y: dir.y + plane.y * fovX
       };
       this.rayLengths[i] = this._dda(x, y, ray, world);
+      if (this.rayLengths[i] < 0.5) {
+        player.canMoveForward = false;
+      } else {
+        player.canMoveForward = true;
+      }
     }
   }
 

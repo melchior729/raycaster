@@ -20,10 +20,11 @@ export default class Artist {
   drawRays(rayLengths) {
     const height = this.canvas.height;
     this._fillBackground();
-    this.ctx.strokeStyle = this.wallColor;
 
     for (let i = 0; i < rayLengths.length; i++) {
       const dist = rayLengths[i];
+      const lightness = Math.pow(0.95, dist) * 50;
+      this.ctx.strokeStyle = `hsl(240, 100%, ${lightness}%)`;
       let lineHeight = height / (dist || 0.1); // if dist = 0
       if (lineHeight > height) {
         lineHeight = height;
