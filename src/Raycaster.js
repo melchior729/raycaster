@@ -1,8 +1,13 @@
+/**
+ * @file Handles the casting of rays, and stores the ray lengths.
+ * @author Abhay Manoj
+ */
+
 export default class Raycaster {
 
   constructor(width) {
     this.width = width;
-    this.rayLengths = [];
+    this.rayLengths = new Float32Array(width);
   }
 
   /**
@@ -12,7 +17,7 @@ export default class Raycaster {
   */
   shootRays(player, world) {
     this.rayLengths = [];
-    const dir = player.directionVector;
+    const { x, y, directionVector: dir } = player;
     const fov = 0.9; // 90 degrees
     const plane = { x: -dir.y * fov, y: dir.x * fov }
 
@@ -22,46 +27,46 @@ export default class Raycaster {
         x: dir.x + plane.x * fovX,
         y: dir.y + plane.y * fovX
       };
-      this.rayLengths[i] = this._dda(player, ray, world);
+      this.rayLengths[i] = this._dda(x, y, ray, world);
     }
   }
 
   /**
   * Returns the distance to the nearest gridline, aswell as the step to that point.
-  * @param {number} pos - X or y coordinate.
+  * @param {number} cord - The grid coordinate.
   * @param {number} dir - X or y value of the direction vector.
-  * @param {number} i - Index of pos on the grid.
-  * @param {number} tileSize - The tilesize of the world.
+  * @param {number} i - Index on the grid.
   * @param {number} delta - The length between gridlines.
   */
-  _getStepAndDist(pos, dir, i, tileSize, delta) {
-    if (dir < 0) {
-      return [-1, delta * (pos / tileSize - i)];
-    }
-    return [1, delta * (i + 1 - pos / tileSize)];
+  _getStepAndDist(cord, dir, i, delta) {
+    return dir < 0
+      ? [-1, (cord - i) * delta]
+      : [1, (i + 1 - cord) * delta];
   }
 
   /**
   * Returns the length between the player, and the wall at a given angle.
-  * @param {Player} player - The player to look from.
+  * @param {number} x - X coordinate of the player.
+  * @param {number} y - Y coordinate of the player.
   * @param {[number], [number]} ray - The direction vector to look to.
   * @param {World} world - The world that the player is in.
   */
-  _dda(player, ray, world) {
+  _dda(x, y, ray, world) {
     const dx = Math.abs(1 / ray.x);
     const dy = Math.abs(1 / ray.y);
+    const gridX = x / world.tileSize;
+    const gridY = y / world.tileSize;
 
-    let currX = Math.floor(player.x / world.tileSize);
-    let currY = Math.floor(player.x / world.tileSize);
+    let currX = Math.floor(gridX);
+    let currY = Math.floor(gridY);
 
-    let [stepX, distX] = this._getStepAndDist(player.x, ray.x, currX, world.tileSize, dx);
-    let [stepY, distY] = this._getStepAndDist(player.y, ray.y, currY, world.tileSize, dy);
+    let [stepX, distX] = this._getStepAndDist(gridX, ray.x, currX, dx);
+    let [stepY, distY] = this._getStepAndDist(gridY, ray.y, currY, dy);
 
-    let hit = false;
     let side = 0; // 0 means horizontal hit, 1 is vertical hit
-    let depth = world.grid.length ** 2;
+    let depth = 1000;
 
-    while (!hit && depth > 0) {
+    while (!world.isWall(currY, currX) && depth > 0) {
       if (distX < distY) {
         currX += stepX;
         distX += dx;
@@ -72,9 +77,6 @@ export default class Raycaster {
         side = 1;
       }
 
-      if (world.isWall(currY, currX)) {
-        hit = true;
-      }
       depth--;
     }
 
