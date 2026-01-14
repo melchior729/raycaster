@@ -8,24 +8,29 @@ export default class Artist {
   constructor(canvas) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
+    this.backgroundColor = 'black';
+    this.wallColor = 'blue';
+    this.playerColor = 'gold';
   }
 
+  /**
+  * Draws the rays onto the screen.
+  * @param {number[]} rayLengths - The lengths of each ray to draw
+  */
   drawRays(rayLengths) {
     const height = this.canvas.height;
-
-    this.ctx.fillStyle = 'black';
-    this.ctx.fillRect(0, 0, this.canvas.width, height);
+    this._fillBackground();
+    this.ctx.strokeStyle = this.wallColor;
 
     for (let i = 0; i < rayLengths.length; i++) {
       const dist = rayLengths[i];
-      let lineHeight = height / (dist || 0.1);
+      let lineHeight = height / (dist || 0.1); // if dist = 0
       if (lineHeight > height) {
         lineHeight = height;
       }
-
       const startY = (height - lineHeight) / 2;
+
       this.ctx.beginPath();
-      this.ctx.strokeStyle = 'blue';
       this.ctx.moveTo(i, startY);
       this.ctx.lineTo(i, startY + lineHeight);
       this.ctx.stroke();
@@ -33,25 +38,19 @@ export default class Artist {
   }
 
   /**
-  * Draws the background and walls onto the screen.
+  * Draws the map onto the screen.
   * @param {World} world - The world to draw.
   */
-  drawScreen(world) {
-    const width = this.canvas.width;
-    const height = this.canvas.height;
+  drawMap(world) {
     const sideLength = world.sideLength;
     const tileSize = world.tileSize;
     this._updateScale(world);
-
     this.ctx.save();
+
     this.ctx.scale(this.scale, this.scale);
+    this._fillBackground();
 
-    const backgroundColor = 'black';
-    this.ctx.fillStyle = backgroundColor;
-    this.ctx.fillRect(0, 0, width, height);
-
-    const wallColor = 'purple';
-    this.ctx.fillStyle = wallColor;
+    this.ctx.fillStyle = this.wallColor;
     for (let i = 0; i < sideLength; i++) {
       for (let j = 0; j < sideLength; j++) {
         if (world.grid[i][j]) {
@@ -61,14 +60,6 @@ export default class Artist {
     }
 
     this.ctx.restore();
-  }
-
-  /**
-  * Updates the scaling between the world and the canvas.
-  * @param {World} world - The world to compare against.
-  */
-  _updateScale(world) {
-    this.scale = this.canvas.width / (world.sideLength * world.tileSize);
   }
 
   /**
@@ -84,10 +75,26 @@ export default class Artist {
     const py = player.y + player.size / 2;
 
     this.ctx.setTransform(x * this.scale, y * this.scale, -y * this.scale, x * this.scale, px * this.scale, py * this.scale);
-    this.ctx.fillStyle = 'gold';
+    this.ctx.fillStyle = this.playerColor;
     this.ctx.fillRect(-player.size / 2, -player.size / 2, player.size, player.size);
 
     this.ctx.restore();
+  }
+
+  /**
+  * Updates the scaling between the world and the canvas.
+  * @param {World} world - The world to compare against.
+  */
+  _updateScale(world) {
+    this.scale = this.canvas.width / (world.sideLength * world.tileSize);
+  }
+
+  /**
+  * Fills the background with the background color.
+  */
+  _fillBackground() {
+    this.ctx.fillStyle = this.backgroundColor;
+    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
   }
 }
 
