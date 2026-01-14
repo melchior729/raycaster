@@ -1,5 +1,5 @@
 /**
- * @file Contains methods to draw components onto the screen.
+ * @file Contains mgthods to draw components onto the screen.
  * @author Abhay Manoj
  */
 
@@ -44,8 +44,8 @@ export default class Artist {
   drawMap(world) {
     const sideLength = world.sideLength;
     const tileSize = world.tileSize;
-    this._updateScale(world);
     this.ctx.save();
+    this._updateScale(Math.floor(this.canvas.width / 10), world);
 
     this.ctx.scale(this.scale, this.scale);
     this._fillBackground();
@@ -85,8 +85,8 @@ export default class Artist {
   * Updates the scaling between the world and the canvas.
   * @param {World} world - The world to compare against.
   */
-  _updateScale(world) {
-    this.scale = this.canvas.width / (world.sideLength * world.tileSize);
+  _updateScale(width, world) {
+    this.scale = width / (world.sideLength * world.tileSize);
   }
 
   /**
@@ -97,4 +97,3 @@ export default class Artist {
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
   }
 }
-
