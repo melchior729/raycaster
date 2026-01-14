@@ -1,15 +1,35 @@
 :root {
   --bg-color: rgb(26, 26, 26);
   --font: Helvetica, sans-serif;
+  --font-color: white;
+
   /* welcome to 2026 */
 }
 
 body {
   text-align: center;
   font-family: var(--font);
-  color: white;
-  margin: 5vh 0;
+  color: var(--font-color);
   background-color: var(--bg-color);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 5em;
+}
+
+h2 {
+  font-size: 1.8em;
+}
+
+p {
+  font-size: 1.5em;
+}
+
+h2 {
+  color: red;
 }
 
 i {
@@ -22,7 +42,19 @@ i {
 }
 
 canvas {
+  margin: 5vh 0;
   background-color: white;
+}
+
+button {
+  color: white;
+  background-color: black;
+  font-size: 20px;
+  border: 3px solid black;
+}
+
+button:hover {
+  filter: brightness(150%);
 }
 
 .links {
@@ -32,5 +64,13 @@ canvas {
 }
 
 a {
+  color: blue;
   font-family: var(--font);
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+a:hover {
+  color: lightblue;
+  text-decoration: underline;
 }
