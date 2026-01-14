@@ -30,13 +30,6 @@ function getDeltaTime(currentTime) {
   return Math.min(deltaTime, 0.1);
 }
 
-// REMOVE THIS AFTERWARDS - JUST FOR TESTING
-const rayLengths = Array.from({ length: 1024 }, (_, i) => {
-  // Simulates a wall at distance 50 in the center, 
-  // receding to distance 300 at the edges.
-  return 50 + Math.abs(512 - i) * 0.5;
-});
-
 /**
 * Calculates the difference in time, moves the player, and draws to the screen.
 * Ran through 'requestAnimationFrame'.

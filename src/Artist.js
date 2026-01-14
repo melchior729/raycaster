@@ -11,21 +11,25 @@ export default class Artist {
   }
 
   drawRays(rayLengths) {
-    const height = canvas.height;
-    const backgroundColor = 'black';
-    this.ctx.fillStyle = backgroundColor;
-    this.ctx.fillRect(0, 0, this.width, height);
-    this.ctx.strokeStyle = 'blue';
-    this.ctx.beginPath();
+    const height = this.canvas.height;
+
+    this.ctx.fillStyle = 'black';
+    this.ctx.fillRect(0, 0, this.canvas.width, height);
 
     for (let i = 0; i < rayLengths.length; i++) {
-      const length = rayLengths[i];
-      const startY = (height - length) / 2;
-      this.ctx.moveTo(i, startY);
-      this.ctx.lineTo(i, startY + length);
-    }
+      const dist = rayLengths[i];
+      let lineHeight = height / (dist || 0.1);
+      if (lineHeight > height) {
+        lineHeight = height;
+      }
 
-    this.ctx.stroke();
+      const startY = (height - lineHeight) / 2;
+      this.ctx.beginPath();
+      this.ctx.strokeStyle = 'blue';
+      this.ctx.moveTo(i, startY);
+      this.ctx.lineTo(i, startY + lineHeight);
+      this.ctx.stroke();
+    }
   }
 
   /**
