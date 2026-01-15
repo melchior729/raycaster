@@ -55,14 +55,12 @@ export default class Raycaster {
   _dda(x, y, ray, world) {
     const dx = Math.abs(1 / ray.x);
     const dy = Math.abs(1 / ray.y);
-    const gridX = x / world.tileSize;
-    const gridY = y / world.tileSize;
 
-    let currX = Math.floor(gridX);
-    let currY = Math.floor(gridY);
+    let currX = Math.floor(x);
+    let currY = Math.floor(y);
 
-    let [stepX, distX] = this._getStepAndDist(gridX, ray.x, currX, dx);
-    let [stepY, distY] = this._getStepAndDist(gridY, ray.y, currY, dy);
+    let [stepX, distX] = this._getStepAndDist(x, ray.x, currX, dx);
+    let [stepY, distY] = this._getStepAndDist(y, ray.y, currY, dy);
 
     let side = 0; // 0 means horizontal hit, 1 is vertical hit
     let depth = 1000;

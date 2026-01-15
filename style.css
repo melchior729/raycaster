@@ -1,42 +1,44 @@
 :root {
-  --bg-color: rgb(26, 26, 26);
-  --font: Helvetica, sans-serif;
-  --font-color: white;
-
-  /* welcome to 2026 */
+  --font-main: Helvetica, sans-serif;
+  --color-text: white;
+  --color-bg: rgb(26, 26, 26);
+  --color-accent: red;
+  --color-hint: darkgrey;
 }
 
 body {
   text-align: center;
-  font-family: var(--font);
-  color: var(--font-color);
-  background-color: var(--bg-color);
+  font-family: var(--font-main);
+  color: var(--color-text);
+  background-color: var(--color-bg);
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 h1 {
   font-size: 5em;
 }
 
-h2 {
+.warning {
   font-size: 1.8em;
+  color: var(--color-accent);
 }
 
-p {
+.instructions {
   font-size: 1.5em;
 }
 
-h2 {
-  color: red;
+.hint {
+  color: var(--color-hint);
 }
 
-i {
-  color: darkgrey;
+.visually-hidden {
+  opacity: 0;
+  position: absolute;
+  pointer-events: none;
 }
 
-.canvas-container {
+.viewport {
   display: flex;
   justify-content: center;
 }
@@ -46,31 +48,239 @@ canvas {
   background-color: white;
 }
 
-button {
-  color: white;
-  background-color: black;
-  font-size: 20px;
-  border: 3px solid black;
-}
-
-button:hover {
-  filter: brightness(150%);
-}
-
-.links {
+.controls {
   margin: 5vh 10vh;
   display: flex;
   justify-content: space-evenly;
+  align-items: center;
 }
 
-a {
-  color: blue;
-  font-family: var(--font);
+.map-select {
+  padding: 20px;
   font-size: 1.5rem;
-  text-decoration: none;
+  text-align: center;
+  width: 20em;
+  background-color: var(--color-bg);
+  color: white;
+  border: 1px solid var(--color-hint);
 }
 
-a:hover {
-  color: lightblue;
-  text-decoration: underline;
+option {
+  background-color: var(--color-bg);
+  color: white;
+}
+
+.btn-label {
+  font-size: 1.5rem;
+  margin-right: 15px;
+  cursor: pointer;
+}
+
+.btn-label:hover {
+  filter: brightness(150%);
+}
+
+#size-changer {
+  background-color: var(--color-bg);
+  color: white;
+  font-size: 1.5rem;
+  width: 150px;
+}
+
+.btn-label:hover {
+  filter: brightness(150%);
+}
+
+#size-changer {
+  background-color: var(--color-bg);
+  color: white;
+  font-size: 1.5rem;
+  width: 150px;
+}
+
+.btn-label:hover {
+  filter: brightness(150%);
+}
+
+#size-changer {
+  background-color: var(--color-bg);
+  color: white;
+  font-size: 1.5rem;
+  width: 150px;
+}
+
+.btn-label:hover {
+  filter: brightness(150%);
+}
+
+#size-changer {
+  background-color: var(--color-bg);
+  color: white;
+  font-size: 1.5rem;
+  width: 150px;
+}
+
+.btn-label:hover {
+  filter: brightness(150%);
+}
+
+#size-changer {
+  background-color: var(--color-bg);
+  color: white;
+  font-size: 1.5rem;
+  width: 150px;
+}
+
+.btn-label:hover {
+  filter: brightness(150%);
+}
+
+#size-changer {
+  background-color: var(--color-bg);
+  color: white;
+  font-size: 1.5rem;
+  width: 150px;
+}
+
+.btn-label:hover {
+  filter: brightness(150%);
+}
+
+#size-changer {
+  background-color: var(--color-bg);
+  color: white;
+  font-size: 1.5rem;
+  width: 150px;
+}
+
+.btn-label:hover {
+  filter: brightness(150%);
+}
+
+#size-changer {
+  background-color: var(--color-bg);
+  color: white;
+  font-size: 1.5rem;
+  width: 150px;
+}
+
+.btn-label:hover {
+  filter: brightness(150%);
+}
+
+#size-changer {
+  background-color: var(--color-bg);
+  color: white;
+  font-size: 1.5rem;
+  width: 150px;
+}
+
+.btn-label:hover {
+  filter: brightness(150%);
+}
+
+#size-changer {
+  background-color: var(--color-bg);
+  color: white;
+  font-size: 1.5rem;
+  width: 150px;
+}
+
+.btn-label:hover {
+  filter: brightness(150%);
+}
+
+#size-changer {
+  background-color: var(--color-bg);
+  color: white;
+  font-size: 1.5rem;
+  width: 150px;
+}
+
+.btn-label:hover {
+  filter: brightness(150%);
+}
+
+#size-changer {
+  background-color: var(--color-bg);
+  color: white;
+  font-size: 1.5rem;
+  width: 150px;
+}
+
+.btn-label:hover {
+  filter: brightness(150%);
+}
+
+#size-changer {
+  background-color: var(--color-bg);
+  color: white;
+  font-size: 1.5rem;
+  width: 150px;
+}
+
+.btn-label:hover {
+  filter: brightness(150%);
+}
+
+#size-changer {
+  background-color: var(--color-bg);
+  color: white;
+  font-size: 1.5rem;
+  width: 150px;
+}
+
+.btn-label:hover {
+  filter: brightness(150%);
+}
+
+#size-changer {
+  background-color: var(--color-bg);
+  color: white;
+  font-size: 1.5rem;
+  width: 150px;
+}
+
+.btn-label:hover {
+  filter: brightness(150%);
+}
+
+#size-changer {
+  background-color: var(--color-bg);
+  color: white;
+  font-size: 1.5rem;
+  width: 150px;
+}
+
+.btn-label:hover {
+  filter: brightness(150%);
+}
+
+#size-changer {
+  background-color: var(--color-bg);
+  color: white;
+  font-size: 1.5rem;
+  width: 150px;
+}
+
+.btn-label:hover {
+  filter: brightness(150%);
+}
+
+#size-changer {
+  background-color: var(--color-bg);
+  color: white;
+  font-size: 1.5rem;
+  width: 150px;
+}
+
+.btn-label:hover {
+  filter: brightness(150%);
+}
+
+#size-changer {
+  background-color: var(--color-bg);
+  color: white;
+  font-size: 1.5rem;
+  width: 150px;
 }
