@@ -23,19 +23,23 @@ export default class Artist {
 
     for (let i = 0; i < rayLengths.length; i++) {
       const dist = rayLengths[i];
-      const lightness = Math.pow(0.95, dist) * 50;
-      this.ctx.strokeStyle = `hsl(240, 100%, ${lightness}%)`;
       let lineHeight = height / (dist || 0.1); // if dist = 0
       if (lineHeight > height) {
         lineHeight = height;
       }
       const startY = (height - lineHeight) / 2;
 
+      const darkness = Math.pow(0.92, dist);
+      this.ctx.strokeStyle = this.wallColor;
+
+      this.ctx.globalAlpha = darkness;
       this.ctx.beginPath();
       this.ctx.moveTo(i, startY);
       this.ctx.lineTo(i, startY + lineHeight);
       this.ctx.stroke();
     }
+
+    this.ctx.globalAlpha = 1.0;
   }
 
   /**
@@ -103,7 +107,6 @@ export default class Artist {
   * @param {string} color - The color to change to
   */
   changeWallColor(color) {
-    console.log(color);
     this.wallColor = color;
   }
 }
