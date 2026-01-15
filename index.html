@@ -4,23 +4,48 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Raycasting</title>
+  <title>Raycasting Engine</title>
   <link rel="stylesheet" href="style.css">
   <script type="module" src="src/main.js" defer></script>
 </head>
 
 <body>
-  <h1>Abhay's Raycaster</h1>
-  <h2><strong>ONLY PLAYABLE ON PC!!!</strong></h2>
-  <p>Move forward with W, backward with S, turn Left with A, and right with D.</p>
-  <p><i>you may want to scroll down / zoom out...</i></p>
-  <div class="canvas-container">
+  <header>
+    <h1>Abhay's Raycaster</h1>
+    <h2 class="warning"><strong>ONLY PLAYABLE ON PC</strong></h2>
+    <p class="instructions">Move forward with W, backward with S, turn Left with A, and right with D.</p>
+    <p class="hint"><i>you may want to scroll down / zoom out...</i></p>
+  </header>
+
+  <main class="viewport">
     <canvas id="canvas" width="1024" height="1024"></canvas>
-  </div>
-  <div class="buttons">
-    <input type="color" id="picker" class="option" value="#0000ff" hidden>
-    <label class="option" for="picker">Change Wall Color</label>
-  </div>
+  </main>
+
+  <footer class="controls">
+    <div class="control-group">
+      <input type="color" id="bg-picker" class="visually-hidden" value="#000000">
+      <label for="bg-picker" class="btn-label">Change World Color</label>
+    </div>
+
+    <div class="control-group">
+      <input type="color" id="fg-picker" class="visually-hidden" value="#0000ff">
+      <label for="fg-picker" class="btn-label">Change Wall Color</label>
+    </div>
+
+    <div class="control-group">
+      <label for="size-changer" class="btn-label">Grid Size</label>
+      <input type="number" id="size-changer" min="16" max="144" placeholder="Ex. 32">
+    </div>
+
+    <div class="control-group">
+      <select name="maps" id="maps" class="map-select">
+        <option value="pillars">Pillars</option>
+        <option value="border">Simple Border</option>
+        <option value="expanding-square">Expanding Square</option>
+      </select>
+    </div>
+
+  </footer>
 </body>
 
 </html>

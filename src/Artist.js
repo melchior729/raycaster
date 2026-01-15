@@ -111,4 +111,12 @@ export default class Artist {
   changeWallColor(color) {
     this.wallColor = color;
   }
+
+  /**
+  * Changes the background color.
+  * @param {string} color - The color to change to
+  */
+  changeBackgroundColor(color) {
+    this.backgroundColor = color;
+  }
 }

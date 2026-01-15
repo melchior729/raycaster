@@ -1,7 +1,7 @@
 /**
- * @file Contains the instantiation of classes, and the main loop.
- * @author Abhay Manoj
- */
+* @file Contains the instantiation of classes, and the main loop.
+* @author Abhay Manoj
+*/
 
 import Artist from './Artist.js';
 import InputController from './InputController.js';
@@ -10,25 +10,44 @@ import Raycaster from './Raycaster.js';
 import World from './World.js';
 
 const canvas = document.getElementById('canvas');
-let wallColor = document.querySelector('#picker').value;
+const backgroundColorPicker = document.querySelector('#bg-picker');
+const sideLengthPicker = document.querySelector('#size-changer');
+const wallColorPicker = document.querySelector('#fg-picker');
+let wallColor = wallColorPicker.value;
+const mapPicker = document.querySelector('#maps');
+let map = mapPicker.value ?? 'pillars';
 const artist = new Artist(canvas, wallColor);
 const controller = new InputController();
 const sideLength = 32;
-const world = new World(sideLength);
+const world = new World(map, sideLength);
 const player = new Player();
 const caster = new Raycaster(canvas.width);
 let lastTime = 0;
 
+/**
+* Adds event listeners to UI elements for real-time updates.
+*/
+function addListeners() {
+  backgroundColorPicker.addEventListener('input', () => {
+    artist.changeBackgroundColor(backgroundColorPicker.value);
+  });
 
-document.addEventListener('input', e => {
-  wallColor = document.querySelector('#bgPicker').value;
-  artist.changeWallColor(wallColor);
-});
+  mapPicker.addEventListener('click', () => {
+    mapPicker.showPicker();
+  });
 
-document.addEventListener('input', e => {
-  wallColor = document.querySelector('#fgPicker').value;
-  artist.changeWallColor(wallColor);
-});
+  mapPicker.addEventListener('change', () => {
+    world.setMap(mapPicker.value);
+  });
+
+  wallColorPicker.addEventListener('input', () => {
+    artist.changeWallColor(wallColorPicker.value);
+  });
+
+  sideLengthPicker.addEventListener('input', () => {
+    world.setSideLength(sideLengthPicker.value);
+  });
+}
 
 /**
 * Returns the time since the last 'tick'.
@@ -44,8 +63,7 @@ function getDeltaTime(currentTime) {
 
 /**
 * Calculates the difference in time, moves the player, and draws to the screen.
-* Ran through 'requestAnimationFrame'.
-* @param {number} currentTime - This is handled by requestAnimationFrame.
+* @param {number} currentTime - Handled by requestAnimationFrame
 */
 function main(currentTime) {
   const oldX = player.x;
@@ -67,4 +85,5 @@ function main(currentTime) {
   requestAnimationFrame(main);
 }
 
+addListeners();
 main(lastTime);
