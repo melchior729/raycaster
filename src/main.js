@@ -10,13 +10,20 @@ import Raycaster from './Raycaster.js';
 import World from './World.js';
 
 const canvas = document.getElementById('canvas');
-const artist = new Artist(canvas);
+let wallColor = document.querySelector('#picker').value;
+const artist = new Artist(canvas, wallColor);
 const controller = new InputController();
 const sideLength = 16;
 const world = new World(sideLength);
 const player = new Player();
 const caster = new Raycaster(canvas.width);
 let lastTime = 0;
+
+document.addEventListener('input', e => {
+  console.log('hi');
+  wallColor = document.querySelector('#picker').value;
+  artist.changeWallColor(wallColor);
+});
 
 /**
 * Returns the time since the last 'tick'.

@@ -5,11 +5,11 @@
 
 export default class Artist {
 
-  constructor(canvas) {
+  constructor(canvas, wallColor) {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
     this.backgroundColor = 'black';
-    this.wallColor = 'blue';
+    this.wallColor = wallColor;
     this.playerColor = 'gold';
   }
 
@@ -96,5 +96,14 @@ export default class Artist {
   _fillBackground() {
     this.ctx.fillStyle = this.backgroundColor;
     this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+  }
+
+  /**
+  * Changes the wall color.
+  * @param {string} color - The color to change to
+  */
+  changeWallColor(color) {
+    console.log(color);
+    this.wallColor = color;
   }
 }

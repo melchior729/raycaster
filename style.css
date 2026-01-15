@@ -1,8 +1,7 @@
 :root {
-  --bg-color: rgb(26, 26, 26);
   --font: Helvetica, sans-serif;
   --font-color: white;
-
+  --bg-color: rgb(26, 26, 26);
   /* welcome to 2026 */
 }
 
@@ -46,18 +45,31 @@ canvas {
   background-color: white;
 }
 
-button {
+.links {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+option {
+  color: white;
+  background-color: darkblue;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 20px;
+  border: none;
+}
+
+.socials {
   color: white;
   background-color: black;
-  font-size: 20px;
-  border: 3px solid black;
+  padding: 10px;
 }
 
 button:hover {
   filter: brightness(150%);
 }
 
-.links {
+.buttons {
   margin: 5vh 10vh;
   display: flex;
   justify-content: space-evenly;
@@ -71,6 +83,5 @@ a {
 }
 
 a:hover {
-  color: lightblue;
   text-decoration: underline;
 }
