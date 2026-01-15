@@ -7,7 +7,7 @@ export default class Raycaster {
 
   constructor(width) {
     this.width = width;
-    this.rayLengths = new Float32Array(width);
+    this.rays = [];
   }
 
   /**
@@ -26,7 +26,12 @@ export default class Raycaster {
         x: dir.x + plane.x * fovX,
         y: dir.y + plane.y * fovX
       };
-      this.rayLengths[i] = this._dda(x, y, ray, world);
+
+      const { direction: distance, hitVertical } = this._dda(x, y, ray, world);
+      this.rays[i] = {
+        distance: distance,
+        side: hitVertical
+      };
     }
   }
 
@@ -60,23 +65,24 @@ export default class Raycaster {
     let [stepX, distX] = this._getStepAndDist(x, ray.x, currX, dx);
     let [stepY, distY] = this._getStepAndDist(y, ray.y, currY, dy);
 
-    let side = 0; // 0 means horizontal hit, 1 is vertical hit
+    let hitVertical = false;
     let depth = 1000;
 
     while (!world.isWall(currY, currX) && depth > 0) {
       if (distX < distY) {
         currX += stepX;
         distX += dx;
-        side = 0;
+        hitVertical = false;
       } else {
         currY += stepY;
         distY += dy;
-        side = 1;
+        hitVertical = true;
       }
 
       depth--;
     }
 
-    return side === 0 ? distX - dx : distY - dy;
+    const direction = hitVertical ? distY - dy : distX - dx;
+    return { direction, hitVertical };
   }
 }

@@ -15,21 +15,25 @@ export default class Artist {
 
   /**
   * Draws the rays onto the screen.
-  * @param {number[]} rayLengths - The lengths of each ray to draw
+  * @param {{number, bool}} rays - The distance and sides of the rays.
   */
-  drawRays(rayLengths) {
+  drawRays(rays) {
     const height = this.canvas.height;
     this._fillBackground(this.canvas.width, height);
 
-    for (let i = 0; i < rayLengths.length; i++) {
-      const dist = rayLengths[i];
-      let lineHeight = height / (dist || 0.1); // if dist = 0
+    for (let i = 0; i < rays.length; i++) {
+      const { distance, side } = rays[i];
+      let lineHeight = height / (distance || 0.1); // if distance = 0
       if (lineHeight > height) {
         lineHeight = height;
       }
       const startY = (height - lineHeight) / 2;
 
-      const darkness = Math.pow(0.92, dist);
+      let darkness = Math.pow(0.92, distance);
+      if (side) {
+        darkness *= 0.7;
+      }
+
       this.ctx.strokeStyle = this.wallColor;
 
       this.ctx.globalAlpha = darkness;
