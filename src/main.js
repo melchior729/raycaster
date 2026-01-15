@@ -25,6 +25,25 @@ const caster = new Raycaster(canvas.width);
 let lastTime = 0;
 
 /**
+* Finds an open spot in the world and puts the player there.
+* @param {Player} player - The player to add.
+* @param {World} world - The world to spawn on.
+*/
+function setValidSpawn(player, world) {
+  let valid = false;
+  while (!valid) {
+    let rx = Math.floor(Math.random() * world.width);
+    let ry = Math.floor(Math.random() * world.height);
+
+    if (!world.isWall(ry, rx)) {
+      player.x = rx + 0.5;
+      player.y = ry + 0.5;
+      valid = true;
+    }
+  }
+}
+
+/**
 * Adds event listeners to UI elements for real-time updates.
 */
 function addListeners() {
@@ -38,6 +57,7 @@ function addListeners() {
 
   mapPicker.addEventListener('change', () => {
     world.setMap(mapPicker.value);
+    setValidSpawn(player, world);
     player.reset();
   });
 
@@ -49,6 +69,7 @@ function addListeners() {
     world.setSideLength(sideLengthPicker.value);
   });
 }
+
 
 /**
 * Returns the time since the last 'tick'.
