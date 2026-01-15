@@ -67,13 +67,13 @@ export default class Artist {
   * Draws the player onto the canvas.
   * @param {Player} player - The player to draw.
   */
-  drawPlayer(player) {
+  drawPlayer(player, tileSize) {
     this.ctx.save();
     this.ctx.scale(this.scale, this.scale);
 
     const { x, y } = player.directionVector;
-    const px = player.x + player.size / 2;
-    const py = player.y + player.size / 2;
+    const px = player.x * tileSize;
+    const py = player.y * tileSize;
 
     this.ctx.setTransform(x * this.scale, y * this.scale, -y * this.scale, x * this.scale, px * this.scale, py * this.scale);
     this.ctx.fillStyle = this.playerColor;

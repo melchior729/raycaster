@@ -47,7 +47,7 @@ function main(currentTime) {
   caster.shootRays(player, world);
   artist.drawRays(caster.rayLengths);
   artist.drawMap(world);
-  artist.drawPlayer(player);
+  artist.drawPlayer(player, world.tileSize);
   requestAnimationFrame(main);
 }
 
