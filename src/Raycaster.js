@@ -12,11 +12,10 @@ export default class Raycaster {
 
   /**
   * Shoots the rays, stores the distance between the wall and the player, column i at index i.
-  * @param {Player} - The player that we are looking out as.
-  * @param {World} - The game world
+  * @param {Player} player - The player that we are looking out as.
+  * @param {World} world - The game world
   */
   shootRays(player, world) {
-    this.rayLengths = [];
     const { x, y, directionVector: dir } = player;
     const fov = 0.9; // 90 degrees
     const plane = { x: -dir.y * fov, y: dir.x * fov }
@@ -28,7 +27,6 @@ export default class Raycaster {
         y: dir.y + plane.y * fovX
       };
       this.rayLengths[i] = this._dda(x, y, ray, world);
-      player.canMoveForward = this.rayLengths[i] > 0.5;
     }
   }
 

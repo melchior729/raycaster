@@ -108,8 +108,10 @@ export default class World {
   * @returns {boolean} True if it is a wall, false otherwise
   */
   isWall(x, y) {
-    if (!this.grid[x]) return true;
-    return this.grid[x][y] === 1;
+    if (y < 0 || y >= this.grid.length || x < 0 || x >= this.grid[y].length) {
+      return true;
+    }
+    return this.grid[y][x] !== 0;
   }
 
   /**

@@ -4,283 +4,187 @@
   --color-bg: rgb(26, 26, 26);
   --color-accent: red;
   --color-hint: darkgrey;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --input-bg: rgba(0, 0, 0, 0.4);
+  --input-border: rgba(255, 255, 255, 0.2);
 }
 
 body {
   text-align: center;
   font-family: var(--font-main);
   color: var(--color-text);
-  background-color: var(--color-bg);
+  background: radial-gradient(circle at center, #1b2735 0%, #090a0f 100%);
+  background-attachment: fixed;
   margin: 0;
-  padding: 0;
-}
-
-h1 {
-  font-size: 5em;
-}
-
-.warning {
-  font-size: 1.8em;
-  color: var(--color-accent);
-}
-
-.instructions {
-  font-size: 1.5em;
-}
-
-.hint {
-  color: var(--color-hint);
-}
-
-.visually-hidden {
-  opacity: 0;
-  position: absolute;
-  pointer-events: none;
-}
-
-.viewport {
+  padding: 20px 0;
+  min-height: 100vh;
   display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* --- GLASS CONTAINER (The "Card" Look) --- */
+.glass-container {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  padding: 12px 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+
+  /* Flexbox defaults to row, which caused your horizontal header issue */
+  display: flex;
+  align-items: center;
   justify-content: center;
 }
 
-canvas {
-  margin: 5vh 0;
+/* --- HEADER FIX --- */
+/* Forces the title, warning, and text to stack vertically */
+header.glass-container {
+  flex-direction: column;
+  margin: 0 auto;
+  /* Centers the header card itself */
+}
+
+.title {
+  width: 100%;
+}
+
+h1 {
+  font-size: 3.5em;
+  margin: 10px 0;
+}
+
+.warning {
+  font-size: 1.5em;
+  color: var(--color-accent);
+  margin: 5px 0;
+}
+
+/* --- VIEWPORT FIX --- */
+/* Ensures the glass border hugs the canvas tightly */
+.canvas-wrap {
+  width: fit-content;
+  /* Critical: Stops it from stretching to screen edge */
+  margin: 0 auto;
+  /* Centers it on the screen */
+  padding: 10px;
+  /* Space between canvas and glass border */
+}
+
+.viewport canvas {
   background-color: white;
+  border-radius: 6px;
+  display: block;
+  /* Responsive sizing */
+  max-width: 85vw;
+  height: auto;
 }
 
+/* --- CONTROLS --- */
 .controls {
-  margin: 5vh 10vh;
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
   align-items: center;
+  gap: 20px;
+  padding-bottom: 40px;
 }
 
-.map-select {
-  padding: 20px;
-  font-size: 1.5rem;
-  text-align: center;
-  width: 20em;
-  background-color: var(--color-bg);
-  color: white;
-  border: 1px solid var(--color-hint);
+.config-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 15px;
 }
 
 option {
   background-color: var(--color-bg);
-  color: white;
 }
 
 .btn-label {
-  font-size: 1.5rem;
-  margin-right: 15px;
+  font-size: 1rem;
   cursor: pointer;
+  line-height: 1;
 }
 
-.btn-label:hover {
-  filter: brightness(150%);
+/* --- INPUTS & DROPDOWN STYLING --- */
+/* Shared style for Grid Size input and Map Select dropdown */
+#size-changer,
+.map-select {
+  background: var(--input-bg);
+  color: white;
+  border: 1px solid var(--input-border);
+  padding: 5px 8px;
+  font-size: 1rem;
+  border-radius: 4px;
 }
 
 #size-changer {
-  background-color: var(--color-bg);
+  width: 70px;
+  margin-left: 10px;
+}
+
+/* Dropdown specific fixes */
+.custom-select {
+  position: relative;
+  padding-right: 35px;
+  /* Space for the glass container padding */
+}
+
+.map-select {
+  appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  padding-right: 25px;
+  /* Space for the arrow inside the box */
+}
+
+/* The custom arrow */
+.custom-select::after {
+  content: "▼";
+  font-size: 0.7rem;
+  position: absolute;
+  right: 20px;
+  /* Position relative to the container */
+  pointer-events: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+/* --- SOCIAL LINKS --- */
+.social-links {
+  display: flex;
+  gap: 30px;
+}
+
+.social-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   color: white;
-  font-size: 1.5rem;
-  width: 150px;
+  text-decoration: none;
+  font-size: 1rem;
 }
 
-.btn-label:hover {
-  filter: brightness(150%);
+.social-item img {
+  width: 20px;
+  height: 20px;
 }
 
-#size-changer {
-  background-color: var(--color-bg);
-  color: white;
-  font-size: 1.5rem;
-  width: 150px;
+.social-item.github img {
+  filter: invert(1);
 }
 
-.btn-label:hover {
-  filter: brightness(150%);
-}
-
-#size-changer {
-  background-color: var(--color-bg);
-  color: white;
-  font-size: 1.5rem;
-  width: 150px;
-}
-
-.btn-label:hover {
-  filter: brightness(150%);
-}
-
-#size-changer {
-  background-color: var(--color-bg);
-  color: white;
-  font-size: 1.5rem;
-  width: 150px;
-}
-
-.btn-label:hover {
-  filter: brightness(150%);
-}
-
-#size-changer {
-  background-color: var(--color-bg);
-  color: white;
-  font-size: 1.5rem;
-  width: 150px;
-}
-
-.btn-label:hover {
-  filter: brightness(150%);
-}
-
-#size-changer {
-  background-color: var(--color-bg);
-  color: white;
-  font-size: 1.5rem;
-  width: 150px;
-}
-
-.btn-label:hover {
-  filter: brightness(150%);
-}
-
-#size-changer {
-  background-color: var(--color-bg);
-  color: white;
-  font-size: 1.5rem;
-  width: 150px;
-}
-
-.btn-label:hover {
-  filter: brightness(150%);
-}
-
-#size-changer {
-  background-color: var(--color-bg);
-  color: white;
-  font-size: 1.5rem;
-  width: 150px;
-}
-
-.btn-label:hover {
-  filter: brightness(150%);
-}
-
-#size-changer {
-  background-color: var(--color-bg);
-  color: white;
-  font-size: 1.5rem;
-  width: 150px;
-}
-
-.btn-label:hover {
-  filter: brightness(150%);
-}
-
-#size-changer {
-  background-color: var(--color-bg);
-  color: white;
-  font-size: 1.5rem;
-  width: 150px;
-}
-
-.btn-label:hover {
-  filter: brightness(150%);
-}
-
-#size-changer {
-  background-color: var(--color-bg);
-  color: white;
-  font-size: 1.5rem;
-  width: 150px;
-}
-
-.btn-label:hover {
-  filter: brightness(150%);
-}
-
-#size-changer {
-  background-color: var(--color-bg);
-  color: white;
-  font-size: 1.5rem;
-  width: 150px;
-}
-
-.btn-label:hover {
-  filter: brightness(150%);
-}
-
-#size-changer {
-  background-color: var(--color-bg);
-  color: white;
-  font-size: 1.5rem;
-  width: 150px;
-}
-
-.btn-label:hover {
-  filter: brightness(150%);
-}
-
-#size-changer {
-  background-color: var(--color-bg);
-  color: white;
-  font-size: 1.5rem;
-  width: 150px;
-}
-
-.btn-label:hover {
-  filter: brightness(150%);
-}
-
-#size-changer {
-  background-color: var(--color-bg);
-  color: white;
-  font-size: 1.5rem;
-  width: 150px;
-}
-
-.btn-label:hover {
-  filter: brightness(150%);
-}
-
-#size-changer {
-  background-color: var(--color-bg);
-  color: white;
-  font-size: 1.5rem;
-  width: 150px;
-}
-
-.btn-label:hover {
-  filter: brightness(150%);
-}
-
-#size-changer {
-  background-color: var(--color-bg);
-  color: white;
-  font-size: 1.5rem;
-  width: 150px;
-}
-
-.btn-label:hover {
-  filter: brightness(150%);
-}
-
-#size-changer {
-  background-color: var(--color-bg);
-  color: white;
-  font-size: 1.5rem;
-  width: 150px;
-}
-
-.btn-label:hover {
-  filter: brightness(150%);
-}
-
-#size-changer {
-  background-color: var(--color-bg);
-  color: white;
-  font-size: 1.5rem;
-  width: 150px;
+.social-item:hover {
+  filter: brightness(130%);
 }

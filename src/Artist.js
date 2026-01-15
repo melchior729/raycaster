@@ -1,5 +1,5 @@
 /**
- * @file Contains mgthods to draw components onto the screen.
+ * @file Contains methods to draw components onto the screen.
  * @author Abhay Manoj
  */
 

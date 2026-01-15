@@ -38,6 +38,8 @@ function addListeners() {
 
   mapPicker.addEventListener('change', () => {
     world.setMap(mapPicker.value);
+    player.x = 1.5;
+    player.y = 1.5;
   });
 
   wallColorPicker.addEventListener('input', () => {
@@ -81,7 +83,7 @@ function main(currentTime) {
   caster.shootRays(player, world);
   artist.drawRays(caster.rayLengths);
   artist.drawMap(world);
-  artist.drawPlayer(player, world.tileSize);
+  artist.drawPlayer(player, world.tileSize, world);
   requestAnimationFrame(main);
 }
 

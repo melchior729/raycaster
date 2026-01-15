@@ -10,7 +10,7 @@ export default class Player {
     this.y = 1.5;
     this.speed = 3;
     this.size = 25;
-    this.rotationDelta = 0.08;
+    this.rotationDelta = 4;
     this.directionVector = { x: 1, y: 0 }
   }
 
@@ -46,8 +46,7 @@ export default class Player {
   * @param {number} direction - 1 for right, -1 for left.
   */
   _rotate(deltaTime, direction) {
-    const frameRate = 60;
-    const angle = this.rotationDelta * deltaTime * frameRate * direction;
+    const angle = this.rotationDelta * deltaTime * direction;
     const { x, y } = this.directionVector;
 
     this.directionVector.x = x - y * angle;

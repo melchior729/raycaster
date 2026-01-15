@@ -1,5 +1,5 @@
 /**
- * @file Controls keyboard input, and the brings about the result of those inputs.
+ * @file Controls keyboard input, and  brings about the result of those inputs.
  * @author Abhay Manoj
  */
 
@@ -7,6 +7,7 @@ export default class InputController {
 
   constructor() {
     this.pressed = new Set();
+    this.validKeys = ['w', 'a', 's', 'd']
     this._setup();
   }
 
@@ -15,9 +16,8 @@ export default class InputController {
   */
   _setup() {
     document.addEventListener("keydown", e => {
-      const validKeys = ['w', 'a', 's', 'd']
       const key = e.key;
-      if (validKeys.includes(key)) {
+      if (this.validKeys.includes(key)) {
         this.pressed.add(key);
       }
     });
