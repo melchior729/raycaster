@@ -49,7 +49,7 @@ header.glass-container:hover {
 }
 
 header h1,
-header .warning,
+header .info,
 header .instructions,
 header .hint {
   width: fit-content;
@@ -59,7 +59,7 @@ header .hint {
 }
 
 header h1:hover,
-header .warning:hover,
+header .info:hover,
 header .instructions:hover,
 header .hint:hover {
   transform: scale(1.05);
@@ -70,7 +70,7 @@ h1 {
   margin: 10px 0;
 }
 
-.warning {
+.info {
   font-size: 1.5em;
   color: var(--color-accent);
   margin: 5px 0;
