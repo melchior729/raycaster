@@ -43,7 +43,18 @@ function getDeltaTime(currentTime) {
 * @param {number} currentTime - This is handled by requestAnimationFrame.
 */
 function main(currentTime) {
+  const oldX = player.x;
+  const oldY = player.y;
   controller.movePlayer(player, getDeltaTime(currentTime));
+
+  if (world.isWall(Math.floor(player.x), Math.floor(oldY))) {
+    player.x = oldX;
+  }
+
+  if (world.isWall(Math.floor(oldX), Math.floor(player.y))) {
+    player.y = oldY;
+  }
+
   caster.shootRays(player, world);
   artist.drawRays(caster.rayLengths);
   artist.drawMap(world);
