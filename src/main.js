@@ -21,7 +21,12 @@ let lastTime = 0;
 
 
 document.addEventListener('input', e => {
-  wallColor = document.querySelector('#picker').value;
+  wallColor = document.querySelector('#bgPicker').value;
+  artist.changeWallColor(wallColor);
+});
+
+document.addEventListener('input', e => {
+  wallColor = document.querySelector('#fgPicker').value;
   artist.changeWallColor(wallColor);
 });
 

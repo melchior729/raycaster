@@ -19,7 +19,7 @@ export default class Artist {
   */
   drawRays(rayLengths) {
     const height = this.canvas.height;
-    this._fillBackground();
+    this._fillBackground(this.canvas.width, height);
 
     for (let i = 0; i < rayLengths.length; i++) {
       const dist = rayLengths[i];
@@ -50,15 +50,14 @@ export default class Artist {
     const sideLength = world.sideLength;
     const tileSize = world.tileSize;
     this.ctx.save();
-    this._updateScale(Math.floor(this.canvas.width / 10), world);
+    this._updateScale(Math.floor(this.canvas.width / 5), world);
 
     this.ctx.scale(this.scale, this.scale);
-    this._fillBackground();
 
     this.ctx.fillStyle = this.wallColor;
     for (let i = 0; i < sideLength; i++) {
       for (let j = 0; j < sideLength; j++) {
-        if (world.grid[i][j]) {
+        if (world.isWall(j, i)) {
           this.ctx.fillRect(i * tileSize, j * tileSize, tileSize, tileSize);
         }
       }
@@ -88,6 +87,7 @@ export default class Artist {
 
   /**
   * Updates the scaling between the world and the canvas.
+  * @param {number} width - the width of the screen
   * @param {World} world - The world to compare against.
   */
   _updateScale(width, world) {
@@ -96,10 +96,12 @@ export default class Artist {
 
   /**
   * Fills the background with the background color.
+  * @param {number} width - Width of the screen.
+  * @param {number} height - Height of the screen
   */
-  _fillBackground() {
+  _fillBackground(width, height) {
     this.ctx.fillStyle = this.backgroundColor;
-    this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+    this.ctx.fillRect(0, 0, width, height)
   }
 
   /**
