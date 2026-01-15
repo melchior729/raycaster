@@ -24,7 +24,6 @@ body {
   gap: 20px;
 }
 
-/* --- GLASS CONTAINER (The "Card" Look) --- */
 .glass-container {
   background: var(--glass-bg);
   backdrop-filter: blur(10px);
@@ -33,18 +32,14 @@ body {
   padding: 12px 20px;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
 
-  /* Flexbox defaults to row, which caused your horizontal header issue */
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-/* --- HEADER FIX --- */
-/* Forces the title, warning, and text to stack vertically */
 header.glass-container {
   flex-direction: column;
   margin: 0 auto;
-  /* Centers the header card itself */
 }
 
 .title {
@@ -62,27 +57,20 @@ h1 {
   margin: 5px 0;
 }
 
-/* --- VIEWPORT FIX --- */
-/* Ensures the glass border hugs the canvas tightly */
 .canvas-wrap {
   width: fit-content;
-  /* Critical: Stops it from stretching to screen edge */
   margin: 0 auto;
-  /* Centers it on the screen */
   padding: 10px;
-  /* Space between canvas and glass border */
 }
 
 .viewport canvas {
   background-color: white;
   border-radius: 6px;
   display: block;
-  /* Responsive sizing */
   max-width: 85vw;
   height: auto;
 }
 
-/* --- CONTROLS --- */
 .controls {
   display: flex;
   flex-direction: column;
@@ -108,8 +96,6 @@ option {
   line-height: 1;
 }
 
-/* --- INPUTS & DROPDOWN STYLING --- */
-/* Shared style for Grid Size input and Map Select dropdown */
 #size-changer,
 .map-select {
   background: var(--input-bg);
@@ -125,11 +111,9 @@ option {
   margin-left: 10px;
 }
 
-/* Dropdown specific fixes */
 .custom-select {
   position: relative;
   padding-right: 35px;
-  /* Space for the glass container padding */
 }
 
 .map-select {
@@ -137,16 +121,13 @@ option {
   -webkit-appearance: none;
   cursor: pointer;
   padding-right: 25px;
-  /* Space for the arrow inside the box */
 }
 
-/* The custom arrow */
 .custom-select::after {
   content: "▼";
   font-size: 0.7rem;
   position: absolute;
   right: 20px;
-  /* Position relative to the container */
   pointer-events: none;
 }
 
@@ -161,7 +142,6 @@ option {
   border: 0;
 }
 
-/* --- SOCIAL LINKS --- */
 .social-links {
   display: flex;
   gap: 30px;

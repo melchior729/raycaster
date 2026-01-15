@@ -8,7 +8,7 @@ export default class World {
   constructor(map, sideLength) {
     this.sideLength = sideLength;
     this.map = map;
-    this.grid = this._generatePillarGrid();
+    this.grid = this._generatePillarWorld();
     this.tileSize = 64;
   }
 
@@ -23,10 +23,10 @@ export default class World {
         this.grid = this._generateBorderWorld();
         break;
       case 'expanding-square':
-        this.grid = this._generateScaledPatternGrid();
+        this.grid = this._generateScaledPatternWorld();
         break;
       default:
-        this.grid = this._generatePillarGrid();
+        this.grid = this._generatePillarWorld();
     }
   }
 
@@ -34,7 +34,7 @@ export default class World {
   * Generates a symmetrical, nested square pattern that scales with the grid size.
   * @returns {number[][]} 2D array with a scaled geometric pattern
   */
-  _generateScaledPatternGrid() {
+  _generateScaledPatternWorld() {
     const size = this.sideLength;
     const grid = Array.from({ length: size }, () => Array(size).fill(0));
 
@@ -72,7 +72,7 @@ export default class World {
   * Generates a square grid with a solid outer border and internal pillars.
   * @returns {number[][]} A 2D array where 1 represents a wall and 0 is empty space
   */
-  _generatePillarGrid() {
+  _generatePillarWorld() {
     const grid = [];
     for (let i = 0; i < this.sideLength; i++) {
       grid.push([]);
