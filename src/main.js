@@ -38,8 +38,7 @@ function addListeners() {
 
   mapPicker.addEventListener('change', () => {
     world.setMap(mapPicker.value);
-    player.x = 1.5;
-    player.y = 1.5;
+    player.reset();
   });
 
   wallColorPicker.addEventListener('input', () => {

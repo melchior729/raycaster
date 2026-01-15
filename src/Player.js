@@ -79,4 +79,13 @@ export default class Player {
     this.directionVector.x = this.directionVector.x / length;
     this.directionVector.y = this.directionVector.y / length;
   }
+
+  /**
+  * Resets the player's x, y, and direction vector to default.
+  */
+  reset() {
+    this.x = 1.5;
+    this.y = 1.5;
+    this.directionVector = { x: 1, y: 0 }
+  }
 }
