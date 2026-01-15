@@ -8,7 +8,7 @@ export default class Player {
   constructor() {
     this.x = 1.5;
     this.y = 1.5;
-    this.speed = 5;
+    this.speed = 3;
     this.size = 25;
     this.rotationDelta = 0.08;
     this.directionVector = { x: 1, y: 0 }

@@ -7,7 +7,7 @@ export default class World {
 
   constructor(sideLength) {
     this.sideLength = sideLength;
-    this.grid = this._generateCameraGrid();
+    this.grid = this._generateCameraWorld();
     this.tileSize = 64;
   }
 
@@ -16,7 +16,7 @@ export default class World {
    * Includes a solid outer border and concentric-style wall clusters.
    * @returns {number[][]} A 16x16 2D array representing the game world.
    */
-  _generateCameraGrid() {
+  _generateCameraWorld() {
     const size = 16;
     let grid = Array.from({ length: size }, () => Array(size).fill(0));
 
