@@ -55,8 +55,8 @@ export default class Raycaster {
   _dda(x, y, ray, world) {
     const dx = Math.abs(1 / ray.x);
     const dy = Math.abs(1 / ray.y);
-    const gridX = x / world.tileSize;
-    const gridY = y / world.tileSize;
+    const gridX = x;
+    const gridY = y;
 
     let currX = Math.floor(gridX);
     let currY = Math.floor(gridY);
