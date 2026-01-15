@@ -4,7 +4,7 @@ A lightweight, high-performance raycasting engine built from scratch using moder
 
 ![Project Screenshot](imgs/example.png)
 
-## 🚀 Features
+## Features
 
 * **Core Raycasting Engine:** Implements the **DDA (Digital Differential Analysis)** algorithm for precise and efficient wall detection.
 * **Procedural Map Generation:**
@@ -17,7 +17,7 @@ A lightweight, high-performance raycasting engine built from scratch using moder
     * Live map switching.
 * **Zero Dependencies:** Written entirely in ES6+ JavaScript modules.
 
-## 🎮 Controls
+## Controls
 
 | Key | Action |
 | :--- | :--- |
@@ -28,7 +28,7 @@ A lightweight, high-performance raycasting engine built from scratch using moder
 
 **UI Controls:** Use the bottom panel to change colors, map patterns, and grid complexity.
 
-## 🛠️ Technical Implementation
+## Technical Implementation
 
 ### Architecture
 The project follows a modular Object-Oriented structure:
@@ -44,7 +44,7 @@ Instead of stepping forward by a fixed distance (which is inaccurate) or checkin
 
 The `_dda` method in `Raycaster.js` calculates the length of the ray from the current position to the next x-side or y-side of a grid square. This ensures the algorithm only checks grid intersections, making it extremely efficient, running effectively `O(N)` time complexity.
 
-## 📦 Installation & Setup
+## Installation & Setup
 
 From the project directory:
 
@@ -56,11 +56,11 @@ npm install -g live-server
 live-server
 ```
 
-## 👤 Author
+## Author
 
 **Abhay Manoj**
 
 - [GitHub  ](https://www.github.com/melchior729)
-- [LinkedIn](https://www.linkedin.com/in/abhaymanoj729)  
+- [LinkedIn](https://www.linkedin.com/in/abhaymanoj729)
 
 Created for educational purposes to explore vector math and computer graphics.
