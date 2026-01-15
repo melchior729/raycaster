@@ -66,7 +66,8 @@ function addListeners() {
   });
 
   sideLengthPicker.addEventListener('input', () => {
-    world.setSideLength(sideLengthPicker.value);
+    world.setSideLength(Number(sideLengthPicker.value));
+    setValidSpawn(player, world);
   });
 }
 
