@@ -32,8 +32,8 @@ let lastTime = 0;
 function setValidSpawn(player, world) {
   let valid = false;
   while (!valid) {
-    let rx = Math.floor(Math.random() * world.width);
-    let ry = Math.floor(Math.random() * world.height);
+    let rx = Math.floor(Math.random() * world.sideLength);
+    let ry = Math.floor(Math.random() * world.sideLength);
 
     if (!world.isWall(ry, rx)) {
       player.x = rx + 0.5;
@@ -69,7 +69,6 @@ function addListeners() {
     world.setSideLength(sideLengthPicker.value);
   });
 }
-
 
 /**
 * Returns the time since the last 'tick'.
