@@ -25,6 +25,7 @@ A lightweight, high-performance raycasting engine built from scratch using moder
 | **S** | Move Backward |
 | **A** | Rotate Camera Left |
 | **D** | Rotate Camera Right |
+| **Shift** | Sprint |
 
 **UI Controls:** Use the bottom panel to change colors, map patterns, and grid complexity.
 

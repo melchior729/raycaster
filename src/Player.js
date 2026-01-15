@@ -18,26 +18,30 @@ export default class Player {
   * Moves the player depending on the direction provided.
   * @param {number} deltaTime - The time since the last tick.
   * @param {number} direction - 1 for forward, -1 for backward.
+  * @param {number} multplier - The speed mulitpler.
   */
-  _move(deltaTime, direction) {
-    this.x += this.directionVector.x * this.speed * deltaTime * direction;
-    this.y += this.directionVector.y * this.speed * deltaTime * direction;
+  _move(deltaTime, direction, multiplier = 1) {
+    const speed = this.speed * multiplier;
+    this.x += this.directionVector.x * speed * deltaTime * direction;
+    this.y += this.directionVector.y * speed * deltaTime * direction;
   }
 
   /**
   * Moves the player forward.
   * @param {number} deltaTime - The time since the last tick.
+  * @param {number} multplier - The speed mulitpler.
   */
-  moveForward(deltaTime) {
-    this._move(deltaTime, 1);
+  moveForward(deltaTime, multiplier) {
+    this._move(deltaTime, 1, multiplier);
   }
 
   /**
   * Moves the player backward.
   * @param {number} deltaTime - The time since the last tick.
+  * @param {number} multpler - The speed mulitplier.
   */
-  moveBackward(deltaTime) {
-    this._move(deltaTime, -1);
+  moveBackward(deltaTime, multiplier) {
+    this._move(deltaTime, -1, multiplier);
   }
 
   /**
