@@ -4,18 +4,77 @@ A lightweight, high-performance raycasting engine built from scratch using moder
 
 ![Project Screenshot](imgs/example.png)
 
+## Mathematical Principles
+
+This engine relies purely on vector mathematics and trigonometry to simulate 3D space on a 2D plane. Below is a breakdown of the core algorithms.
+
+### 1. The Camera Plane & Ray Vectors
+To cast rays, we define a 2D camera plane perpendicular to the player's direction vector.
+* **Direction Vector ($\vec{d}$):** A normalized unit vector representing where the player is looking.
+* **Camera Plane ($\vec{p}$):** A vector perpendicular to $\vec{d}$ that represents the screen surface.
+
+For every vertical strip $x$ of the screen (where $x \in [-1, 1]$), the ray direction $\vec{r}$ is calculated as:
+
+$$\vec{r} = \vec{d} + \vec{p} \cdot x$$
+
+### 2. Digital Differential Analysis (DDA)
+Raycasting by stepping fixed units is inefficient. DDA allows us to jump to the next grid line intersection in $O(N)$ complexity.
+
+We derive the **Delta Distance** (distance the ray travels to cross one grid unit in either X or Y) using the Pythagorean theorem, which simplifies algebraically to:
+
+* $\Delta x = \sqrt{1 + (r_y / r_x)^2} = | 1 / r_x |$
+* $\Delta y = \sqrt{1 + (r_x / r_y)^2} = | 1 / r_y |$
+
+The algorithm tracks `sideDistX` and `sideDistY` (distance to the *next* grid line) and increments grid coordinates one step at a time until a wall is hit.
+
+### 3. Perpendicular Wall Distance (Fish-eye Correction)
+Calculating the Euclidean distance from the player to the wall results in a "fish-eye" lens distortion. To solve this, we calculate the perpendicular distance to the camera plane.
+
+If the ray hit a vertical wall (x-side):
+$$\text{distance} = \frac{\text{mapX} - \text{playerX} + (1 - \text{stepX}) / 2}{\text{rayDirX}}$$
+
+This projects the collision point onto the camera vector $\vec{d}$, ensuring walls look flat when viewed straight on.
+
+### 4. Perspective Projection
+Once the perpendicular distance ($dist$) is known, the height of the wall slice ($h$) on the screen is inversely proportional to the distance:
+
+$$h_{line} = \frac{h_{screen}}{dist}$$
+
+### 5. Rotation Matrices
+Player rotation is handled by multiplying the direction and plane vectors by a 2D rotation matrix. For a rotation angle $\theta$:
+
+$$
+\begin{bmatrix}
+x' \\
+y'
+\end{bmatrix} =
+\begin{bmatrix}
+\cos \theta & -\sin \theta \\
+\sin \theta & \cos \theta
+\end{bmatrix}
+\begin{bmatrix}
+x \\
+y
+\end{bmatrix}
+$$
+
+In the code, this is applied iteratively to both `directionVector` and the camera plane to maintain the FOV.
+
+### 6. Illumination Falloff
+Depth perception is enhanced via exponential fog. The opacity ($\alpha$) of the wall strip is calculated as a decay function of distance ($d$):
+
+$$\alpha = 0.92^d$$
+
 ## Features
 
-* **Core Raycasting Engine:** Implements the **DDA (Digital Differential Analysis)** algorithm for precise and efficient wall detection.
+* **Core Raycasting Engine:** Custom DDA implementation.
 * **Procedural Map Generation:**
-    * **Pillars:** A classic grid of pillars.
-    * **Simple Border:** An empty room with solid borders.
-    * **Expanding Square:** A mathematically generated, recursive geometric pattern.
+    * **Pillars:** Modulo-based grid generation (`i % 4`).
+    * **Expanding Square:** Recursive geometric constraints.
 * **Real-time Customization:**
     * Adjustable grid resolution (16x16 to 144x144).
-    * Dynamic wall and background color styling.
-    * Live map switching.
-* **Zero Dependencies:** Written entirely in ES6+ JavaScript modules.
+    * Dynamic wall/background color styling.
+* **Zero Dependencies:** Pure ES6+ JavaScript.
 
 ## Controls
 
@@ -26,24 +85,6 @@ A lightweight, high-performance raycasting engine built from scratch using moder
 | **A** | Rotate Camera Left |
 | **D** | Rotate Camera Right |
 | **Shift** | Sprint |
-
-**UI Controls:** Use the bottom panel to change colors, map patterns, and grid complexity.
-
-## Technical Implementation
-
-### Architecture
-The project follows a modular Object-Oriented structure:
-
-* **`Raycaster.js`**: The core math engine. It casts rays from the player's perspective using vector math to calculate wall distances.
-* **`World.js`**: Manages the grid data and procedural generation logic for map patterns.
-* **`Player.js`**: Handles physics, collision checks, and movement vectors/rotation matrices.
-* **`Artist.js`**: Handles the rendering pipeline, drawing vertical strips to the Canvas based on calculated ray depths (fisheye correction included).
-* **`InputController.js`**: Manages asynchronous keyboard state for smooth movement.
-
-### The DDA Algorithm
-Instead of stepping forward by a fixed distance (which is inaccurate) or checking every pixel (which is slow), this engine uses **Digital Differential Analysis**.
-
-The `_dda` method in `Raycaster.js` calculates the length of the ray from the current position to the next x-side or y-side of a grid square. This ensures the algorithm only checks grid intersections, making it extremely efficient, running effectively `O(N)` time complexity.
 
 ## Installation & Setup
 
@@ -56,12 +97,9 @@ npm install -g live-server
 # run the server
 live-server
 ```
-
 ## Author
+Abhay Manoj
 
-**Abhay Manoj**
+[My GitHub](https://github.com/melchior729)
 
-- [GitHub  ](https://www.github.com/melchior729)
-- [LinkedIn](https://www.linkedin.com/in/abhaymanoj729)
-
-Created for educational purposes to explore vector math and computer graphics.
+[My LinkedIn](https://linkedin.com/in/abhaymanoj729)
